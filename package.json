@@ -6,8 +6,13 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=false",
-    "lint": "ng lint"
+    "test": "ng test --watch=false && npm run test:scripts",
+    "lint": "ng lint",
+    "dados": "node scripts/gerar-dados.mjs",
+    "prestart": "npm run dados",
+    "prebuild": "npm run dados",
+    "pretest": "npm run dados",
+    "test:scripts": "node --test \"scripts/*.test.mjs\""
   },
   "private": true,
   "packageManager": "npm@11.19.0",

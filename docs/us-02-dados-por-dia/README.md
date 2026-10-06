@@ -12,12 +12,12 @@ Como desenvolvedor, quero os dados divididos por dia e um serviço que os entreg
 
 ## Critérios de aceite
 
-- [ ] Interface TypeScript `Santo` cobre todos os campos da seção 4.
-- [ ] Script `scripts/gerar-dados.mjs` lê `dados/santos.json` e gera `public/data/dias/MM-DD.json` (366 arquivos) e o índice com `data` e `nome`; ele roda antes do build e falha se não houver exatamente 366 registros.
-- [ ] O serviço expõe a ficha de um `MM-DD` via `HttpClient` e o índice de forma síncrona.
+- [x] Interface TypeScript `Santo` cobre todos os campos da seção 4.
+- [x] Script `scripts/gerar-dados.mjs` lê `dados/santos.json` e gera `public/data/dias/MM-DD.json` (366 arquivos) e o índice com `data` e `nome`; ele roda antes do build e falha se não houver exatamente 366 registros.
+- [x] O serviço expõe a ficha de um `MM-DD` via `HttpClient` e o índice de forma síncrona.
 - [ ] Na página pré-renderizada, a ficha vem embutida no HTML e o navegador não refaz a requisição na primeira carga.
 - [ ] Na troca de dia no navegador, se a requisição falhar, aparece mensagem com botão "Tentar de novo".
-- [ ] Testes: o script gera 366 arquivos; o serviço retorna o registro certo para `10-06` e `02-29`.
+- [x] Testes: o script gera 366 arquivos; o serviço retorna o registro certo para `10-06` e `02-29`.
 
 ## Pronto quando
 

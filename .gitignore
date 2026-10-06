@@ -45,3 +45,7 @@ Thumbs.db
 
 # Metadados do Windows ao copiar arquivos para o WSL
 *:Zone.Identifier
+
+# Gerados por scripts/gerar-dados.mjs
+/public/data/
+/src/app/dados/indice.gerado.ts
