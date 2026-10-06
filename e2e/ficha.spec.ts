@@ -33,3 +33,25 @@ test.describe('ficha do santo', () => {
     await expect(page.locator('app-ficha .grau')).toHaveCount(0);
   });
 });
+
+test.describe('origem e datas', () => {
+  test('aparece em 10-06 com "Colônia, Alemanha"', async ({ page }) => {
+    const resposta = await page.goto('/dia/10-06');
+    expect(await resposta!.text()).toContain('Colônia, Alemanha');
+    const bloco = page.locator('app-ficha dl');
+    await expect(bloco).toContainText('Colônia, Alemanha');
+    await expect(bloco).toContainText('c. 1030');
+    await expect(bloco).toContainText('6 de outubro de 1101');
+  });
+
+  test('não aparece em 12-25 (celebração)', async ({ page }) => {
+    await page.goto('/dia/12-25');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Natal do Senhor');
+    await expect(page.locator('app-ficha dl')).toHaveCount(0);
+  });
+
+  test('em 02-06 mostra "Dados de São Paulo Miki"', async ({ page }) => {
+    await page.goto('/dia/02-06');
+    await expect(page.locator('app-ficha .referentes')).toHaveText('Dados de São Paulo Miki');
+  });
+});

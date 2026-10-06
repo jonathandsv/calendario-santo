@@ -3,6 +3,7 @@ import { ROTULOS_GRAU } from '../dados/rotulos';
 import { Santo } from '../dados/santo';
 import { DIAS_DA_SEMANA, diaDaSemana, diaEMes } from '../datas/datas';
 import { RelogioService } from '../datas/relogio.service';
+import { fatosDo } from './fatos';
 
 /**
  * Ficha do santo (PRD 5.4). Tudo vem no HTML pré-renderizado, exceto o dia da semana,
@@ -24,6 +25,7 @@ export class Ficha {
     const ano = this.relogio.ano();
     return ano === null ? null : DIAS_DA_SEMANA[diaDaSemana(this.santo().data, ano)];
   });
+  protected readonly fatos = computed(() => fatosDo(this.santo()));
   protected readonly grau = computed(() => {
     const grau = this.santo().grau;
     return grau ? ROTULOS_GRAU[grau] : null;

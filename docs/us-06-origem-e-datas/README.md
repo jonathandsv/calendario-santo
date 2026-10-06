@@ -12,9 +12,9 @@ Como visitante, quero ver origem, nascimento e falecimento, para situar o santo 
 
 ## Critérios de aceite
 
-- [ ] O bloco segue as regras de exibição da seção 4.
-- [ ] Não aparece em `12-25` (celebração) e aparece em `10-06` com "Colônia, Alemanha".
-- [ ] Em `02-06` mostra a nota "Dados de São Paulo Miki".
+- [x] O bloco segue as regras de exibição da seção 4.
+- [x] Não aparece em `12-25` (celebração) e aparece em `10-06` com "Colônia, Alemanha".
+- [x] Em `02-06` mostra a nota "Dados de São Paulo Miki".
 
 ## Pronto quando
 

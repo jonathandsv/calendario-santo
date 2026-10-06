@@ -12,6 +12,28 @@
     }
   </div>
 
+  @if (fatos(); as f) {
+    <div class="fatos">
+      <dl>
+        <div class="origem">
+          <dt>Origem</dt>
+          <dd>{{ f.origem }}</dd>
+        </div>
+        <div>
+          <dt>Nascimento</dt>
+          <dd>{{ f.nascimento }}</dd>
+        </div>
+        <div>
+          <dt>Falecimento</dt>
+          <dd>{{ f.falecimento }}</dd>
+        </div>
+      </dl>
+      @if (f.referentesA; as nome) {
+        <p class="referentes">Dados de {{ nome }}</p>
+      }
+    </div>
+  }
+
   <p class="descricao">{{ santo().descricao }}</p>
 
   @if (santo().obs; as obs) {
