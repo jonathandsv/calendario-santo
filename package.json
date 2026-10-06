@@ -12,7 +12,11 @@
     "prestart": "npm run dados",
     "prebuild": "npm run dados",
     "pretest": "npm run dados",
-    "test:scripts": "node --test \"scripts/*.test.mjs\""
+    "test:scripts": "node --test \"scripts/*.test.mjs\"",
+    "postbuild": "node scripts/pos-build.mjs",
+    "servir": "node scripts/servir.mjs",
+    "e2e": "playwright test",
+    "verificar": "npm run build && npm test && npm run lint && npm run e2e"
   },
   "private": true,
   "packageManager": "npm@11.19.0",
@@ -35,6 +39,7 @@
     "@angular/cli": "^22.2.1",
     "@angular/compiler-cli": "^22.2.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^22.12.0",
     "angular-eslint": "22.5.0",
     "eslint": "^10.9.1",

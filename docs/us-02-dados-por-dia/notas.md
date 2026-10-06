@@ -18,4 +18,4 @@
 
 ## Pendências
 
-- Os critérios "ficha embutida no HTML sem nova requisição" e "mensagem com 'Tentar de novo' na troca de dia" dependem da rota `dia/:data`; o resolver e o componente estão prontos e são ligados e verificados na US-04.
+- Nenhuma. Os critérios "ficha embutida no HTML sem nova requisição" e "mensagem com 'Tentar de novo' na troca de dia" dependiam da rota `dia/:data` e foram ligados e verificados na US-04 (testes em `e2e/rotas.spec.ts`).

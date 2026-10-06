@@ -49,3 +49,7 @@ Thumbs.db
 # Gerados por scripts/gerar-dados.mjs
 /public/data/
 /src/app/dados/indice.gerado.ts
+
+# Playwright
+/test-results/
+/playwright-report/

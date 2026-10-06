@@ -12,11 +12,11 @@ Como visitante, quero que cada dia tenha um endereço próprio e já pronto, par
 
 ## Critérios de aceite
 
-- [ ] `app.routes.server.ts` declara `dia/:data` com `RenderMode.Prerender`, `getPrerenderParams` devolvendo as 366 chaves do índice e `PrerenderFallback.None`.
-- [ ] O build gera `dia/MM-DD/index.html` para os 366 dias, incluindo `02-29`.
-- [ ] `/` é pré-renderizada e, no navegador, navega para o dia de hoje com `replaceUrl`.
-- [ ] Existe uma página 404 estática com link para o dia de hoje.
-- [ ] Trocar de dia no navegador atualiza o endereço sem recarregar, e os botões voltar e avançar funcionam.
+- [x] `app.routes.server.ts` declara `dia/:data` com `RenderMode.Prerender`, `getPrerenderParams` devolvendo as 366 chaves do índice e `PrerenderFallback.None`.
+- [x] O build gera `dia/MM-DD/index.html` para os 366 dias, incluindo `02-29`.
+- [x] `/` é pré-renderizada e, no navegador, navega para o dia de hoje com `replaceUrl`.
+- [x] Existe uma página 404 estática com link para o dia de hoje.
+- [x] Trocar de dia no navegador atualiza o endereço sem recarregar, e os botões voltar e avançar funcionam.
 
 ## Pronto quando
 

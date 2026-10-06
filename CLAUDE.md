@@ -19,14 +19,18 @@ O Node é instalado via nvm (versão em `.nvmrc`). Num shell novo: `source ~/.nv
 |---|---|
 | `npm start` | Servidor de desenvolvimento em `http://localhost:4200` |
 | `npm run build` | Build de produção estático em `dist/santo-do-dia/browser` |
-| `npm test` | Testes unitários (Vitest, uma execução) |
+| `npm test` | Testes unitários (Vitest) e dos scripts (`node --test`) |
 | `npm run lint` | ESLint (TypeScript e templates, com regras de acessibilidade) |
+| `npm run e2e` | Testes de navegador (Playwright) contra o build estático; exige `npm run build` antes |
+| `npm run servir` | Serve o build em `http://localhost:4300` como uma hospedagem estática |
+| `npm run verificar` | Build, testes, lint e e2e em sequência — rodar antes de cada commit |
+| `npm run dados` | Gera `public/data/dias/` e `src/app/dados/indice.gerado.ts` (roda sozinho antes de start/build/test) |
 
 ## Fluxo de trabalho por história
 
 1. Ler o `README.md` da história e as seções do PRD indicadas nele.
 2. Implementar com testes.
-3. Rodar `npm run build`, `npm test` e `npm run lint`; todos precisam passar.
+3. Rodar `npm run verificar` (build, testes, lint e e2e) e conferir o código de saída; tudo precisa passar.
 4. Marcar os critérios atendidos (`- [x]`) no `README.md` da história.
 5. Escrever `notas.md` na pasta da história: decisões, desvios em relação ao PRD e pendências.
 6. **Um commit por história**, com mensagem `US-XX: <título da história>` e um resumo no corpo.

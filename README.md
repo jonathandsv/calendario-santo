@@ -15,9 +15,16 @@ Requisitos e histórias: [`docs/PRD.md`](docs/PRD.md).
 npm install      # instala as dependências
 npm start        # servidor de desenvolvimento em http://localhost:4200
 npm run build    # build de produção estático em dist/santo-do-dia/browser
-npm test         # testes unitários (Vitest)
+npm test         # testes unitários (Vitest) e dos scripts (node --test)
 npm run lint     # ESLint
+npm run e2e      # testes de navegador (Playwright) contra o build; rode o build antes
+npm run servir   # serve o build em http://localhost:4300, como uma hospedagem estática
+npm run verificar  # build, testes, lint e e2e em sequência
 ```
+
+Na primeira vez, instale o navegador dos testes: `npx playwright install chromium`.
+
+Os dados de cada dia (`public/data/dias/`) e o índice (`src/app/dados/indice.gerado.ts`) são gerados a partir de `dados/santos.json` por `npm run dados`, que roda sozinho antes de `start`, `build` e `test`.
 
 O build não gera servidor: a pasta `dist/santo-do-dia/browser` contém apenas arquivos estáticos (HTML, CSS, JS, fontes e dados).
 

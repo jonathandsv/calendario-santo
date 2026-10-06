@@ -1,0 +1,15 @@
+<main class="dia">
+  @if (santo(); as s) {
+    <article>
+      <h1>{{ s.nome }}</h1>
+      <p>{{ s.descricao }}</p>
+    </article>
+  } @else {
+    <app-erro-carga [carregando]="recarregando()" (tentarDeNovo)="tentarDeNovo()" />
+  }
+
+  <nav class="vizinhos" aria-label="Dias vizinhos">
+    <a [routerLink]="['/dia', anterior()]">Dia anterior</a>
+    <a [routerLink]="['/dia', seguinte()]">Dia seguinte</a>
+  </nav>
+</main>

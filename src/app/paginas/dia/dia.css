@@ -1,0 +1,19 @@
+.dia {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.vizinhos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.vizinhos a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--azul-noite);
+  font-weight: 600;
+}
