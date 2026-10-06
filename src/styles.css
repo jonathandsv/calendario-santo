@@ -40,3 +40,16 @@ body {
   outline: 3px solid var(--destaque);
   outline-offset: 2px;
 }
+
+/* Texto lido por leitores de tela, mas invisível na tela. */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

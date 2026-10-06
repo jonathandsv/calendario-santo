@@ -12,10 +12,10 @@ Como visitante, quero ver nome, data e descrição do santo, para conhecer quem 
 
 ## Critérios de aceite
 
-- [ ] Mostra dia e mês, nome e descrição do dia da rota já no HTML pré-renderizado; o dia da semana é acrescentado depois da hidratação.
-- [ ] Mostra a etiqueta de grau com o rótulo da seção 4; sem etiqueta quando `grau` é nulo.
-- [ ] Mostra a nota `obs` quando existir.
-- [ ] Mostra o link "Saiba mais" quando `wikipedia` existir, abrindo em nova aba.
+- [x] Mostra dia e mês, nome e descrição do dia da rota já no HTML pré-renderizado; o dia da semana é acrescentado depois da hidratação.
+- [x] Mostra a etiqueta de grau com o rótulo da seção 4; sem etiqueta quando `grau` é nulo.
+- [x] Mostra a nota `obs` quando existir.
+- [x] Mostra o link "Saiba mais" quando `wikipedia` existir, abrindo em nova aba.
 
 ## Pronto quando
 

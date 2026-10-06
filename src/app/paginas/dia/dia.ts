@@ -5,11 +5,12 @@ import { DataMesDia, Santo } from '../../dados/santo';
 import { diaAnterior, diaSeguinte } from '../../datas/datas';
 import { RelogioService } from '../../datas/relogio.service';
 import { ErroCarga } from '../../erro-carga/erro-carga';
+import { Ficha } from '../../ficha/ficha';
 
 /** Página `/dia/MM-DD`. A ficha chega pelo `fichaResolver`. */
 @Component({
   selector: 'app-dia',
-  imports: [RouterLink, ErroCarga],
+  imports: [RouterLink, ErroCarga, Ficha],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dia.html',
   styleUrl: './dia.css',

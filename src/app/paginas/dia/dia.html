@@ -1,9 +1,6 @@
 <main class="dia">
   @if (santo(); as s) {
-    <article>
-      <h1>{{ s.nome }}</h1>
-      <p>{{ s.descricao }}</p>
-    </article>
+    <app-ficha [santo]="s" />
   } @else {
     <app-erro-carga [carregando]="recarregando()" (tentarDeNovo)="tentarDeNovo()" />
   }

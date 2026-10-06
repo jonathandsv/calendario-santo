@@ -1,0 +1,28 @@
+<article class="ficha" [attr.aria-labelledby]="'nome-' + santo().data">
+  <div class="cabecalho">
+    <p class="data">
+      @if (diaDaSemana(); as semana) {
+        <span class="semana">{{ semana }}, </span>
+      }
+      <span>{{ diaEMes() }}</span>
+    </p>
+    <h1 class="nome" [id]="'nome-' + santo().data">{{ santo().nome }}</h1>
+    @if (grau(); as rotulo) {
+      <p class="grau">{{ rotulo }}</p>
+    }
+  </div>
+
+  <p class="descricao">{{ santo().descricao }}</p>
+
+  @if (santo().obs; as obs) {
+    <p class="obs">{{ obs }}</p>
+  }
+
+  @if (santo().wikipedia; as url) {
+    <p class="saiba-mais">
+      <a [href]="url" target="_blank" rel="noopener noreferrer">
+        Saiba mais<span class="visualmente-oculto"> sobre {{ santo().nome }} na Wikipédia (abre em nova aba)</span>
+      </a>
+    </p>
+  }
+</article>
