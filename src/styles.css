@@ -1,0 +1,42 @@
+/* Tokens de design (PRD, seção 7). */
+:root {
+  --azul-noite: #16224a;
+  --fundo: #f3f4f8;
+  --tinta: #121a33;
+  --tinta-suave: #2a3350;
+  --apoio: #47506b;
+  --borda: #d5d9e6;
+  --destaque: #e3b341;
+  --superficie: #ffffff;
+
+  --fonte-titulo: 'Spectral', Georgia, serif;
+  --fonte-texto: 'Figtree', system-ui, sans-serif;
+
+  --raio-botao: 14px;
+  --raio-painel: 18px;
+  --raio-pilula: 999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 2px;
+}

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Santo do dia</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Spectral:wght@500;600&display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; background: #F3F4F8; color: #121A33; font-family: 'Figtree', system-ui, sans-serif">
+<header style="background: #16224A; color: #FFFFFF; padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 16px; flex-shrink: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<button type="button" onClick="{{ abrir }}" aria-haspopup="dialog" style="appearance: none; border: 0; background: transparent; cursor: pointer; padding: 0; min-height: 44px; display: flex; align-items: center; gap: 8px; font-family: 'Spectral', Georgia, serif; font-size: 24px; font-weight: 600; color: #FFFFFF">
+<span>Outubro 2026</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<div style="display: flex; align-items: center; gap: 8px">
+<button type="button" onClick="{{ hoje }}" style="appearance: none; background: transparent; cursor: pointer; min-height: 44px; padding: 0 16px; border: 1px solid rgba(255,255,255,0.5); border-radius: 22px; font-family: inherit; font-size: 14px; font-weight: 600; color: #FFFFFF">Hoje</button>
+<button type="button" onClick="{{ abrir }}" aria-label="Abrir calendário" style="appearance: none; background: transparent; cursor: pointer; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,0.5); border-radius: 22px; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+</button>
+</div>
+</div>
+<nav aria-label="Dias próximos" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{ faixa }}" as="dia" hint-placeholder-count="7">
+<sc-if value="{{ dia.sel }}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-current="date" style="appearance: none; border: 0; cursor: default; padding: 0; height: 64px; border-radius: 14px; background: {{destaque}}; color: #121A33; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase">{{ dia.sem }}</span>
+<span style="font-size: 20px; font-weight: 700">{{ dia.d }}</span>
+</button>
+</sc-if>
+<sc-if value="{{ dia.nsel }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ dia.pick }}" style="appearance: none; border: 0; cursor: pointer; padding: 0; height: 64px; border-radius: 14px; background: rgba(255,255,255,0.09); color: #FFFFFF; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #C9D0E6">{{ dia.sem }}</span>
+<span style="font-size: 20px; font-weight: 600">{{ dia.d }}</span>
+</button>
+</sc-if>
+</sc-for>
+</nav>
+</header>
+<main style="flex: 1; min-height: 0; overflow-y: auto; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="height: 220px; flex-shrink: 0; box-sizing: border-box; border-radius: 16px; border: 1.5px dashed #8A93AE; background: #E4E7F1; color: #47506B; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-8 9"></path></svg>
+<div style="font-size: 14px; font-weight: 600">Imagem do santo</div>
+<div style="font-size: 12px">Wikimedia Commons, com autor e licença</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #47506B">{{ s.dataLonga }}</div>
+<h1 style="margin: 0; font-family: 'Spectral', Georgia, serif; font-size: 28px; line-height: 1.15; font-weight: 600; color: #121A33">{{ s.n }}</h1>
+<sc-if value="{{ s.temGrau }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex">
+<span style="padding: 4px 10px; border-radius: 999px; background: #16224A; color: #FFFFFF; font-size: 12px; font-weight: 600">{{ s.g }}</span>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ s.temFatos }}" hint-placeholder-val="{{ true }}">
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #D5D9E6; border: 1px solid #D5D9E6; border-radius: 14px; overflow: hidden">
+<div style="grid-column: 1 / -1; background: #FFFFFF; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px">
+<dt style="font-size: 12px; font-weight: 600; color: #47506B">Origem</dt>
+<dd style="margin: 0; font-size: 16px; font-weight: 600">{{ s.origem }}</dd>
+</div>
+<div style="background: #FFFFFF; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px">
+<dt style="font-size: 12px; font-weight: 600; color: #47506B">Nascimento</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600">{{ s.nasc }}</dd>
+</div>
+<div style="background: #FFFFFF; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px">
+<dt style="font-size: 12px; font-weight: 600; color: #47506B">Falecimento</dt>
+<dd style="margin: 0; font-size: 15px; font-weight: 600">{{ s.falec }}</dd>
+</div>
+</dl>
+</sc-if>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #2A3350">{{ s.x }}</p>
+</main>
+<sc-if value="{{ aberto }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: rgba(10,15,35,0.55); display: flex; align-items: flex-end">
+<div role="dialog" aria-label="Escolher dia do mês" style="width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 20px 20px 0 0; padding: 12px 16px 24px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<button type="button" aria-label="Mês anterior" style="appearance: none; border: 0; background: #F3F4F8; cursor: pointer; width: 44px; height: 44px; padding: 0; border-radius: 22px; color: #121A33; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</button>
+<div style="font-family: 'Spectral', Georgia, serif; font-size: 20px; font-weight: 600">Outubro 2026</div>
+<div style="display: flex; gap: 8px">
+<button type="button" aria-label="Próximo mês" style="appearance: none; border: 0; background: #F3F4F8; cursor: pointer; width: 44px; height: 44px; padding: 0; border-radius: 22px; color: #121A33; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+<button type="button" onClick="{{ fechar }}" aria-label="Fechar calendário" style="appearance: none; border: 0; background: #F3F4F8; cursor: pointer; width: 44px; height: 44px; padding: 0; border-radius: 22px; color: #121A33; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+</div>
+<div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; font-size: 12px; font-weight: 600; color: #47506B; text-align: center">
+<span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">
+<sc-for list="{{ cal }}" as="c" hint-placeholder-count="35">
+<sc-if value="{{ c.vazio }}" hint-placeholder-val="{{ false }}">
+<span style="height: 46px"></span>
+</sc-if>
+<sc-if value="{{ c.sel }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ c.pick }}" aria-current="date" style="appearance: none; border: 0; cursor: pointer; padding: 0; height: 46px; border-radius: 12px; background: #16224A; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700">{{ c.d }}</button>
+</sc-if>
+<sc-if value="{{ c.hoje }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ c.pick }}" style="appearance: none; cursor: pointer; padding: 0; height: 46px; border-radius: 12px; border: 2px solid {{destaque}}; background: #FFFFFF; color: #121A33; font-family: inherit; font-size: 16px; font-weight: 700">{{ c.d }}</button>
+</sc-if>
+<sc-if value="{{ c.normal }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ c.pick }}" style="appearance: none; border: 0; cursor: pointer; padding: 0; height: 46px; border-radius: 12px; background: #F3F4F8; color: #121A33; font-family: inherit; font-size: 16px; font-weight: 500">{{ c.d }}</button>
+</sc-if>
+</sc-for>
+</div>
+<div style="font-size: 13px; color: #47506B; text-align: center">Toque em um dia para ver o santo</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"destaque":{"editor":"color","default":"#E3B341","options":["#E3B341","#F2A07B","#8FCFBC"]},"aberto":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { dia: 6 };
+}
+dados() {
+if (!this._d) this._d = [{"d":1,"n":"Santa Teresinha do Menino Jesus","g":"Memória","t":"pessoa","x":"Carmelita francesa que entrou no convento de Lisieux aos quinze anos e morreu aos vinte e quatro. Ensinou a \"pequena via\" da confiança e do amor nas coisas simples. É doutora da Igreja e padroeira das missões.","b":"2 de janeiro de 1873","f":"30 de setembro de 1897","l":"Alençon","p":"França"},{"d":2,"n":"Santos Anjos da Guarda","g":"Memória","t":"celebracao","x":"A Igreja recorda que Deus confia cada pessoa aos cuidados de um anjo, que a acompanha e protege ao longo da vida. A memória é celebrada logo depois da festa dos arcanjos.","b":null,"f":null,"l":null,"p":null},{"d":3,"n":"Santos André de Soveral, Ambrósio Francisco Ferro e companheiros, Protomártires do Brasil","g":"Memória","t":"grupo","x":"Os padres André de Soveral e Ambrósio Francisco Ferro e vinte e oito leigos foram mortos em 1645, em Cunhaú e Uruaçu, no Rio Grande do Norte, durante a ocupação holandesa. São os primeiros mártires do Brasil.","b":null,"f":"1645","l":"Rio Grande do Norte","p":"Brasil"},{"d":4,"n":"São Francisco de Assis","g":"Memória","t":"pessoa","x":"Filho de um rico comerciante de Assis, deixou tudo para viver o Evangelho na pobreza e na fraternidade com todas as criaturas. Fundou os franciscanos e recebeu as chagas de Cristo. É padroeiro da ecologia.","b":"c. 1181","f":"3 de outubro de 1226","l":"Assis","p":"Itália"},{"d":5,"n":"São Benedito, o Negro","g":"Memória facultativa","t":"pessoa","x":"Filho de africanos escravizados na Sicília, foi eremita e depois irmão leigo franciscano em Palermo. Mesmo sem saber ler, foi escolhido superior do convento. É um dos santos mais queridos do povo brasileiro.","b":"1526","f":"4 de abril de 1589","l":"San Fratello (Sicília)","p":"Itália"},{"d":6,"n":"São Bruno","g":"Memória facultativa","t":"pessoa","x":"Professor em Reims que recusou ser bispo para buscar a Deus no silêncio. Em 1084, retirou-se com seis companheiros para as montanhas perto de Grenoble e fundou a Ordem dos Cartuxos.","b":"c. 1030","f":"6 de outubro de 1101","l":"Colônia","p":"Alemanha"},{"d":7,"n":"Nossa Senhora do Rosário","g":"Memória","t":"celebracao","x":"Memória instituída em ação de graças pela vitória de Lepanto, em 1571, atribuída à oração do Rosário. Convida a contemplar com Maria os mistérios da vida de Cristo.","b":null,"f":null,"l":null,"p":null},{"d":8,"n":"Santa Pelágia","g":"","t":"pessoa","x":"Segundo a tradição, uma atriz famosa de Antioquia que se converteu ao ouvir a pregação de um bispo. Distribuiu seus bens e viveu como penitente em Jerusalém, no Monte das Oliveiras.","b":"desconhecido","f":"c. 457","l":"Antioquia (Antakya)","p":"Turquia"},{"d":9,"n":"São Dionísio e companheiros, mártires","g":"Memória facultativa","t":"grupo","x":"Primeiro bispo de Paris, enviado para evangelizar a Gália no século III. Foi decapitado com dois companheiros na colina que passou a se chamar Montmartre, o \"monte dos mártires\". É padroeiro da França.","b":"século III","f":"c. 250","l":null,"p":"Itália"},{"d":10,"n":"São Daniel Comboni","g":"","t":"pessoa","x":"Missionário italiano que deu a vida pela África central, com o lema \"salvar a África com a África\". Fundou os Missionários Combonianos e foi o primeiro bispo de Cartum, no Sudão.","b":"15 de março de 1831","f":"10 de outubro de 1881","l":"Limone sul Garda","p":"Itália"},{"d":11,"n":"São João XXIII, papa","g":"Memória facultativa","t":"pessoa","x":"O \"Papa Bom\", de origem camponesa. Eleito já idoso, surpreendeu o mundo ao convocar o Concílio Vaticano II para renovar a Igreja. Escreveu a encíclica \"Pacem in Terris\", sobre a paz.","b":"25 de novembro de 1881","f":"3 de junho de 1963","l":"Sotto il Monte","p":"Itália"},{"d":12,"n":"Nossa Senhora da Conceição Aparecida","g":"Solenidade","t":"celebracao","x":"Em 1717, três pescadores encontraram no rio Paraíba do Sul uma pequena imagem de Nossa Senhora da Conceição, e a pesca, antes escassa, tornou-se abundante. Aparecida é a Rainha e Padroeira do Brasil.","b":null,"f":null,"l":null,"p":null},{"d":13,"n":"São Geraldo de Aurillac","g":"","t":"pessoa","x":"Conde de Aurillac, na França, que viveu como leigo com o espírito de um monge. Governou suas terras com justiça, protegeu os pobres e fundou uma abadia. É um raro exemplo de santo leigo e nobre da Idade Média.","b":"c. 855","f":"c. 909","l":"Aurillac","p":"França"},{"d":14,"n":"São Calisto I, papa","g":"Memória facultativa","t":"pessoa","x":"Antigo escravo que se tornou diácono e depois papa, no início do século III. Cuidou do cemitério cristão da Via Ápia, que leva seu nome, e defendeu o perdão para os pecadores arrependidos.","b":"desconhecido","f":"c. 222","l":"Roma","p":"Itália"},{"d":15,"n":"Santa Teresa de Jesus (d'Ávila)","g":"Memória","t":"pessoa","x":"Carmelita espanhola, mística e escritora. Reformou a Ordem do Carmo com a ajuda de São João da Cruz e fundou dezessete mosteiros. Autora de \"O Castelo Interior\", foi a primeira mulher declarada doutora da Igreja.","b":"28 de março de 1515","f":"4 de outubro de 1582","l":"Ávila","p":"Espanha"},{"d":16,"n":"Santa Margarida Maria Alacoque","g":"Memória facultativa","t":"pessoa","x":"Religiosa da Visitação em Paray-le-Monial, na França. Recebeu as revelações do Sagrado Coração de Jesus, que pediam a comunhão nas primeiras sextas-feiras e uma festa em sua honra.","b":"22 de julho de 1647","f":"17 de outubro de 1690","l":"L'Hautecour (Borgonha)","p":"França"},{"d":17,"n":"Santo Inácio de Antioquia","g":"Memória","t":"pessoa","x":"Bispo de Antioquia, levado preso a Roma para ser lançado às feras, no início do século II. No caminho, escreveu sete cartas às comunidades cristãs, testemunho precioso da Igreja primitiva.","b":"século I","f":"c. 108","l":"Síria","p":"Síria"},{"d":18,"n":"São Lucas, evangelista","g":"Festa","t":"pessoa","x":"Médico e companheiro de São Paulo, autor do terceiro Evangelho e dos Atos dos Apóstolos. Seu Evangelho destaca a misericórdia de Jesus e a presença de Maria. É padroeiro dos médicos e dos artistas.","b":"século I","f":"século I","l":"Antioquia (Antakya)","p":"Turquia"},{"d":19,"n":"São Paulo da Cruz","g":"Memória facultativa","t":"pessoa","x":"Místico italiano que fez da paixão de Cristo o centro de sua vida e pregação. Fundou a Congregação da Paixão, os passionistas, e percorreu a Itália pregando missões populares.","b":"3 de janeiro de 1694","f":"18 de outubro de 1775","l":"Ovada","p":"Itália"},{"d":20,"n":"Santa Maria Bertilla Boscardin","g":"","t":"pessoa","x":"Religiosa italiana de origem camponesa que trabalhou como enfermeira no hospital de Treviso. Cuidou com dedicação de crianças doentes e de soldados feridos na Primeira Guerra Mundial.","b":"6 de outubro de 1888","f":"20 de outubro de 1922","l":"Brendola","p":"Itália"},{"d":21,"n":"Santa Úrsula e companheiras, mártires","g":"","t":"grupo","x":"Segundo a tradição, uma princesa da Bretanha martirizada em Colônia com um grupo de companheiras virgens. Inspirou Santa Ângela Mérici, que deu seu nome às ursulinas.","b":"desconhecido","f":"século IV","l":null,"p":null},{"d":22,"n":"São João Paulo II, papa","g":"Memória facultativa","t":"pessoa","x":"Karol Wojtyła, o primeiro papa polonês. Em quase 27 anos de pontificado, visitou 129 países, criou as Jornadas Mundiais da Juventude e contribuiu para a queda do comunismo na Europa. Visitou o Brasil em 1980, 1991 e 1997.","b":"18 de maio de 1920","f":"2 de abril de 2005","l":"Wadowice","p":"Polônia"},{"d":23,"n":"São João de Capistrano","g":"Memória facultativa","t":"pessoa","x":"Jurista e governador de Perúgia que se fez franciscano. Pregador itinerante por toda a Europa, aos setenta anos animou as tropas cristãs que defenderam Belgrado, em 1456.","b":"24 de junho de 1386","f":"23 de outubro de 1456","l":"Capestrano","p":"Itália"},{"d":24,"n":"Santo Antônio Maria Claret","g":"Memória facultativa","t":"pessoa","x":"Missionário catalão, arcebispo de Santiago de Cuba e confessor da rainha da Espanha. Pregou milhares de sermões, publicou muitos livros e fundou os Missionários Claretianos.","b":"23 de dezembro de 1807","f":"24 de outubro de 1870","l":"Sallent (Catalunha)","p":"Espanha"},{"d":25,"n":"Santo Antônio de Sant'Ana Galvão (Frei Galvão)","g":"Memória","t":"pessoa","x":"Frei Galvão, franciscano de Guaratinguetá, é o primeiro santo nascido no Brasil. Fundou o Mosteiro da Luz, em São Paulo, e é conhecido pelas pílulas de papel que distribuía aos doentes.","b":"13 de maio de 1739","f":"23 de dezembro de 1822","l":"Guaratinguetá (São Paulo)","p":"Brasil"},{"d":26,"n":"São Cedda, bispo","g":"","t":"pessoa","x":"Monge de Lindisfarne e bispo dos saxões orientais, na Inglaterra do século VII. Fundou mosteiros, entre eles o de Lastingham, e serviu de intérprete no Sínodo de Whitby.","b":"c. 620","f":"26 de outubro de 664","l":"Nortúmbria","p":"Reino Unido"},{"d":27,"n":"Santo Evaristo, papa","g":"","t":"pessoa","x":"Um dos primeiros sucessores de São Pedro, papa por volta do ano 100. Segundo a tradição, era filho de um judeu de Belém e organizou o clero da cidade de Roma.","b":"desconhecido","f":"c. 108","l":"Belém","p":"Palestina"},{"d":28,"n":"Santos Simão e Judas Tadeu, apóstolos","g":"Festa","t":"grupo","x":"Dois dos doze apóstolos. Simão é chamado \"o Zelote\"; Judas Tadeu, autor de uma carta do Novo Testamento, é muito invocado nas causas difíceis e desesperadas.","b":null,"f":null,"l":null,"p":null},{"d":29,"n":"São Narciso de Jerusalém","g":"","t":"pessoa","x":"Bispo de Jerusalém no final do século II, eleito já em idade avançada. Segundo o historiador Eusébio, viveu mais de cem anos e tinha fama de santidade e de milagres.","b":"c. 99","f":"c. 216","l":null,"p":null},{"d":30,"n":"São Marcelo, centurião e mártir","g":"","t":"pessoa","x":"Centurião romano que, durante uma festa em honra do imperador, lançou fora suas insígnias militares e declarou-se soldado de Cristo. Foi decapitado em Tânger, no ano 298.","b":"século III","f":"298","l":null,"p":null},{"d":31,"n":"Santo Afonso Rodrigues","g":"","t":"pessoa","x":"Comerciante espanhol que perdeu a esposa e os filhos e entrou na Companhia de Jesus como irmão leigo. Foi porteiro do colégio de Palma de Maiorca por mais de quarenta anos, acolhendo cada visitante como se fosse Cristo.","b":"25 de julho de 1532","f":"31 de outubro de 1617","l":"Segóvia","p":"Espanha"}];
+return this._d;
+}
+renderVals() {
+var self = this;
+var HOJE = 6;
+var D = this.dados();
+var dia = this.state.dia;
+var CURTO = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+var LONGO = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+var sem = function (d) { return (d + 3) % 7; };
+var escolher = function (d) { return function () { self.setState({ dia: d, aberto: false }); }; };
+var r = D[dia - 1];
+var origem = r.l && r.p ? r.l + ', ' + r.p : (r.p || r.l || 'Não conhecida');
+var s = {
+n: r.n, g: r.g, x: r.x,
+temGrau: !!r.g,
+temFatos: !!(r.b || r.f || r.l || r.p),
+origem: origem,
+nasc: r.b || 'Não se aplica',
+falec: r.f || 'Não se aplica',
+dataLonga: LONGO[sem(dia)] + ', ' + dia + ' de outubro'
+};
+var inicio = Math.min(Math.max(dia - 3, 1), 25);
+var faixa = [];
+for (var i = 0; i < 7; i++) {
+var d = inicio + i;
+faixa.push({ d: d, sem: CURTO[sem(d)], sel: d === dia, nsel: d !== dia, pick: escolher(d) });
+}
+var cal = [];
+for (var v = 0; v < 4; v++) cal.push({ vazio: true, sel: false, hoje: false, normal: false, d: '' });
+for (var k = 1; k <= 31; k++) {
+var sel = k === dia;
+var hj = !sel && k === HOJE;
+cal.push({ vazio: false, sel: sel, hoje: hj, normal: !sel && !hj, d: k, pick: escolher(k) });
+}
+var aberto = this.state.aberto;
+if (aberto === undefined) aberto = this.props.aberto === true;
+return {
+destaque: this.props.destaque ?? '#E3B341',
+s: s, faixa: faixa, cal: cal, aberto: aberto,
+abrir: function () { self.setState({ aberto: true }); },
+fechar: function () { self.setState({ aberto: false }); },
+hoje: function () { self.setState({ dia: HOJE, aberto: false }); }
+};
+}
+}
+</script>
+</body>
+</html>
