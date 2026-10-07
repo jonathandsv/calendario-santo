@@ -24,12 +24,44 @@
   gap: 12px;
 }
 
-.mes {
-  margin: 0;
+.botao-mes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
   font-family: var(--fonte-titulo);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
+  cursor: pointer;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.botao-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 22px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.botao-icone:hover {
+  background: rgb(255 255 255 / 10%);
 }
 
 .botao-hoje {
@@ -58,7 +90,9 @@
   padding: 16px 16px 32px;
 }
 
+/* No celular o calendário fica no painel; a coluna lateral é do computador (US-12). */
 .lateral {
+  display: none;
   padding: 16px;
   border: 1px solid var(--borda);
   border-radius: var(--raio-painel);
@@ -77,5 +111,61 @@
 
   .conteudo {
     padding: 32px 24px 48px;
+  }
+}
+
+/* Painel inferior do calendário (celular). */
+.painel {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto 0 0;
+  padding: 12px 16px 24px;
+  border: 0;
+  border-radius: 20px 20px 0 0;
+  background: var(--superficie);
+  color: var(--tinta);
+}
+
+.painel::backdrop {
+  background: rgb(10 15 35 / 55%);
+}
+
+.fechar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: var(--fundo);
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.hoje-painel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--borda);
+  border-radius: 22px;
+  color: var(--azul-noite);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (min-width: 1024px) {
+  .lateral {
+    display: block;
+  }
+
+  .botao-icone,
+  .painel {
+    display: none;
   }
 }

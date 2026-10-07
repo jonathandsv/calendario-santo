@@ -12,8 +12,8 @@ Como visitante no celular, quero abrir o calendário num painel, para não sair 
 
 ## Critérios de aceite
 
-- [ ] Abre pelo nome do mês e pelo ícone; fecha por botão, fundo, Esc e ao escolher um dia.
-- [ ] Com o painel aberto, o foco fica preso nele e volta ao botão de origem ao fechar.
+- [x] Abre pelo nome do mês e pelo ícone; fecha por botão, fundo, Esc e ao escolher um dia.
+- [x] Com o painel aberto, o foco fica preso nele e volta ao botão de origem ao fechar.
 
 ## Pronto quando
 

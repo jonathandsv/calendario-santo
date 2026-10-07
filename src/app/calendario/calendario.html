@@ -6,12 +6,12 @@
       </svg>
     </button>
     <h2 class="titulo" aria-live="polite">{{ titulo() }}@if (ano(); as a) {<span> {{ a }}</span>}</h2>
-    <ng-content select="[acoes]" />
     <button type="button" class="seta" aria-label="Próximo mês" (click)="mudarMes(1)">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M9 6l6 6-6 6" />
       </svg>
     </button>
+    <ng-content select="[acoes]" />
   </div>
 
   <div class="grade">
@@ -51,5 +51,8 @@
     }
   </div>
 
-  <p class="dica">Escolha um dia para ver o santo</p>
+  <div class="rodape">
+    <p class="dica">{{ dica() }}</p>
+    <ng-content select="[rodape]" />
+  </div>
 </div>

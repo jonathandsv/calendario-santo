@@ -1,13 +1,44 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Calendario } from '../../calendario/calendario';
 import { DadosService } from '../../dados/dados.service';
 import { DataMesDia, Santo } from '../../dados/santo';
-import { Calendario } from '../../calendario/calendario';
 import { MESES, partes } from '../../datas/datas';
 import { RelogioService } from '../../datas/relogio.service';
 import { ErroCarga } from '../../erro-carga/erro-carga';
 import { Faixa } from '../../faixa/faixa';
 import { Ficha } from '../../ficha/ficha';
+
+const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/** Faz o Tab e o Shift+Tab darem a volta dentro do contêiner. */
+function prenderFoco(conteiner: HTMLElement, evento: KeyboardEvent): void {
+  if (evento.key !== 'Tab') return;
+  const focaveis = [...conteiner.querySelectorAll<HTMLElement>(FOCAVEIS)].filter((el) => el.tabIndex >= 0);
+  if (!focaveis.length) return;
+  const primeiro = focaveis[0];
+  const ultimo = focaveis[focaveis.length - 1];
+  const ativo = document.activeElement;
+  if (evento.shiftKey && (ativo === primeiro || !conteiner.contains(ativo))) {
+    evento.preventDefault();
+    ultimo.focus();
+  } else if (!evento.shiftKey && (ativo === ultimo || !conteiner.contains(ativo))) {
+    evento.preventDefault();
+    primeiro.focus();
+  }
+}
 
 /** Página `/dia/MM-DD`. A ficha chega pelo `fichaResolver`. */
 @Component({
@@ -30,8 +61,11 @@ export class Dia {
   protected readonly santo = linkedSignal(() => this.ficha());
   protected readonly recarregando = signal(false);
 
-  /** Painel do calendário no celular (US-11). */
+  /** Painel do calendário no celular. */
   readonly calendarioAberto = signal(false);
+  private readonly painel = viewChild.required<ElementRef<HTMLDialogElement>>('painel');
+  /** Botão que abriu o painel, para devolver o foco ao fechar. */
+  private origem: HTMLElement | null = null;
 
   /** "Outubro"; o ano entra depois da hidratação. */
   protected readonly mes = computed(() => {
@@ -44,6 +78,43 @@ export class Dia {
     const hoje = this.relogio.hoje();
     return hoje ? ['/dia', hoje] : ['/'];
   });
+
+  constructor() {
+    afterNextRender(() => {
+      const dialogo = this.painel().nativeElement;
+      // Clique no fundo escurecido fecha o painel (o equivalente de teclado é o Esc, nativo do <dialog>).
+      dialogo.addEventListener('click', (evento) => {
+        if (evento.target === dialogo) this.fecharCalendario();
+      });
+      // O modal já torna o resto da página inerte; aqui o Tab também não escapa para a barra do navegador.
+      dialogo.addEventListener('keydown', (evento) => prenderFoco(dialogo, evento));
+    });
+
+    effect(() => {
+      const dialogo = this.painel().nativeElement;
+      if (this.calendarioAberto()) {
+        if (!dialogo.open) dialogo.showModal();
+      } else if (dialogo.open) {
+        dialogo.close();
+      }
+    });
+  }
+
+  protected abrirCalendario(evento: MouseEvent): void {
+    this.origem = evento.currentTarget as HTMLElement;
+    this.calendarioAberto.set(true);
+  }
+
+  protected fecharCalendario(): void {
+    this.calendarioAberto.set(false);
+  }
+
+  /** O `<dialog>` fechou (Esc, botão, fundo ou escolha de um dia): sincroniza o estado e devolve o foco. */
+  protected aoFecharPainel(): void {
+    this.calendarioAberto.set(false);
+    this.origem?.focus();
+    this.origem = null;
+  }
 
   /** Vai para a data atual (relendo o relógio, caso a meia-noite tenha passado) e fecha o calendário. */
   protected irParaHoje(evento: MouseEvent): void {

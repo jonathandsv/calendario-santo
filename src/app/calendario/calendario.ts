@@ -52,6 +52,7 @@ export class Calendario {
 
   /** Dia selecionado (rota). */
   readonly data = input.required<DataMesDia>();
+  readonly dica = input('Escolha um dia para ver o santo');
   /** Um dia foi escolhido (o painel do celular fecha). */
   readonly escolheu = output<DataMesDia>();
 
