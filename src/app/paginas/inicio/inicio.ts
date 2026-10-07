@@ -1,6 +1,7 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { hojeMesDia } from '../../datas/datas';
+import { MetadadosService } from '../../metadados/metadados.service';
 
 /**
  * Página `/`: no navegador, leva ao dia de hoje substituindo a entrada do histórico.
@@ -37,6 +38,11 @@ import { hojeMesDia } from '../../datas/datas';
 })
 export class Inicio {
   constructor() {
+    inject(MetadadosService).daPagina({
+      titulo: 'Santo do Dia',
+      descricao: 'O santo de cada dia do calendário católico do Brasil, com origem, datas e uma breve história.',
+      caminho: '/',
+    });
     const router = inject(Router);
     afterNextRender(() => {
       router.navigate(['/dia', hojeMesDia()], { replaceUrl: true });

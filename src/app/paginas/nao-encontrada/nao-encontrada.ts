@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MetadadosService } from '../../metadados/metadados.service';
 
 /** Página 404: publicada como `404.html` e exibida para endereços inexistentes. */
 @Component({
@@ -31,4 +32,13 @@ import { RouterLink } from '@angular/router';
     }
   `,
 })
-export class NaoEncontrada {}
+export class NaoEncontrada {
+  constructor() {
+    inject(MetadadosService).daPagina({
+      titulo: 'Página não encontrada | Santo do Dia',
+      descricao: 'Este endereço não corresponde a nenhum dia do calendário.',
+      caminho: '/404',
+      indexar: false,
+    });
+  }
+}

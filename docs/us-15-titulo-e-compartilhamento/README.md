@@ -12,10 +12,10 @@ Como visitante, quero que o link mostre o santo do dia, para compartilhar com co
 
 ## Critérios de aceite
 
-- [ ] O título segue "{nome} — {dia} de {mês} | Santo do Dia".
-- [ ] A meta descrição usa o início de `descricao`.
-- [ ] Cada página tem URL canônica e metadados Open Graph (título, descrição e imagem, quando houver).
-- [ ] Tudo isso está no HTML pré-renderizado, não só depois da hidratação.
+- [x] O título segue "{nome} — {dia} de {mês} | Santo do Dia".
+- [x] A meta descrição usa o início de `descricao`.
+- [x] Cada página tem URL canônica e metadados Open Graph (título, descrição e imagem, quando houver).
+- [x] Tudo isso está no HTML pré-renderizado, não só depois da hidratação.
 
 ## Pronto quando
 

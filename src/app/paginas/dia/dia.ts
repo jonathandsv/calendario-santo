@@ -21,6 +21,7 @@ import { ErroCarga } from '../../erro-carga/erro-carga';
 import { Faixa } from '../../faixa/faixa';
 import { Ficha } from '../../ficha/ficha';
 import { Proximos } from '../../proximos/proximos';
+import { MetadadosService } from '../../metadados/metadados.service';
 
 const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -81,6 +82,13 @@ export class Dia {
   });
 
   constructor() {
+    // Roda também na pré-renderização: título e metadados vão no HTML de cada dia.
+    const metadados = inject(MetadadosService);
+    effect(() => {
+      const santo = this.santo();
+      if (santo) metadados.doDia(santo);
+    });
+
     afterNextRender(() => {
       const dialogo = this.painel().nativeElement;
       // Clique no fundo escurecido fecha o painel (o equivalente de teclado é o Esc, nativo do <dialog>).
