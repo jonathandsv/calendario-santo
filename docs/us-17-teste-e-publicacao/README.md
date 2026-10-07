@@ -12,9 +12,9 @@ Como desenvolvedor, quero um teste do fluxo principal e um build publicável, pa
 
 ## Critérios de aceite
 
-- [ ] Teste cobre: abrir hoje, trocar de dia pela faixa, escolher um dia pelo calendário, voltar com "Hoje".
-- [ ] O teste roda contra o build estático servido localmente, não contra o servidor de desenvolvimento.
-- [ ] README com instruções de publicação em hospedagem estática, incluindo a configuração da página 404.
+- [x] Teste cobre: abrir hoje, trocar de dia pela faixa, escolher um dia pelo calendário, voltar com "Hoje".
+- [x] O teste roda contra o build estático servido localmente, não contra o servidor de desenvolvimento.
+- [x] README com instruções de publicação em hospedagem estática, incluindo a configuração da página 404.
 
 ## Pronto quando
 

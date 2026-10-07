@@ -67,7 +67,14 @@ O HTML é gerado uma vez no build e servido igual para todos. **Nada que dependa
 ```
 dados/        fonte dos dados (santos.json)
 docs/         PRD, histórias (uma pasta por US) e mockups
-scripts/      scripts Node (geração de dados, imagens, verificações)
+scripts/      scripts Node (geração de dados, imagens, verificação do build, servidor local)
 public/       arquivos estáticos copiados para o build
 src/app/      aplicação Angular
+e2e/          testes de navegador (Playwright) contra o build estático
 ```
+
+## Pontos de configuração
+
+- `src/app/site.ts`: `URL_DO_SITE` (domínio usado na canônica e no Open Graph). O valor atual é provisório.
+- `npm run imagens` (US-18): busca as imagens no Wikimedia Commons. Use `SANTO_USER_AGENT` com um contato; sem isso, o Wikimedia limita a taxa.
+- `dados/imagens-aprovadas.json`: datas cujas imagens com licença fora de PD/CC0/CC BY/CC BY-SA foram aprovadas à mão.

@@ -37,3 +37,88 @@ O build não gera servidor: a pasta `dist/santo-do-dia/browser` contém apenas a
 | `scripts/` | Scripts Node de apoio ao build e ao conteúdo |
 | `public/` | Arquivos estáticos copiados para o build |
 | `src/app/` | Aplicação Angular |
+
+## Testes
+
+| Tipo | Onde | Comando |
+|---|---|---|
+| Unitários (lógica de datas, dados, componentes) | `src/**/*.spec.ts` | `npm test` |
+| Scripts (geração de dados, imagens, verificação do build) | `scripts/*.test.mjs` | `npm test` |
+| Verificação do build (366 páginas, conteúdo no HTML, nada que dependa da data) | `scripts/verificar-build.mjs` | roda sozinho no fim de `npm run build` |
+| Navegador, incluindo o fluxo principal e acessibilidade (axe) | `e2e/*.spec.ts` | `npm run e2e` |
+
+Os testes de navegador rodam contra o **build estático** servido por `scripts/servir.mjs` (que imita uma hospedagem estática), nos perfis de celular e computador, e não contra o `ng serve`.
+
+## Publicação
+
+O site é só arquivos estáticos: não há servidor Node em produção.
+
+### 1. Antes do primeiro build de produção
+
+- **Domínio:** troque `URL_DO_SITE` em `src/app/site.ts` pelo endereço definitivo (ex.: `https://santododia.com.br`). Ele é usado na URL canônica e nos metadados Open Graph de cada página.
+- **Imagens (opcional):** rode `npm run imagens` (US-18) para baixar as imagens do Wikimedia Commons e versione `dados/santos.json` e `public/img/santos/`. Veja `docs/us-18-baixar-imagens/notas.md`.
+
+### 2. Gerar o site
+
+```bash
+npm ci
+npm run build
+```
+
+O resultado fica em `dist/santo-do-dia/browser/`. Publique **o conteúdo dessa pasta** na raiz do site:
+
+```
+dist/santo-do-dia/browser/
+├── index.html              → /  (leva ao dia de hoje)
+├── 404.html                → página "não encontrada"
+├── dia/MM-DD/index.html    → /dia/MM-DD  (366 páginas)
+├── data/dias/MM-DD.json    → ficha de cada dia (carregada ao trocar de dia)
+├── img/                    → imagens
+├── media/                  → fontes
+└── *.js, *.css             → aplicação (nomes com hash)
+```
+
+### 3. O que a hospedagem precisa fazer
+
+1. **Servir `index.html` de cada pasta:** `/dia/10-06` (ou `/dia/10-06/`) deve entregar `dia/10-06/index.html`. É o comportamento padrão de quase todas as hospedagens estáticas. O site funciona com e sem a barra final.
+2. **Página 404 própria:** endereços inexistentes (ex.: `/dia/13-40`) devem receber `404.html` **com status 404**. Não configure "redirecionar tudo para `index.html`" (modo SPA): cada página já existe pronta.
+3. **Cache (recomendado):** arquivos `*.js`, `*.css` e `media/*` têm hash no nome e podem ter cache longo (`Cache-Control: public, max-age=31536000, immutable`). Os `*.html` e `data/dias/*.json` devem ser revalidados (`Cache-Control: no-cache`).
+
+### Exemplos de configuração
+
+**Netlify, Cloudflare Pages, Vercel, GitHub Pages:** pasta de publicação `dist/santo-do-dia/browser`, comando de build `npm run build`. Todas usam `404.html` da raiz automaticamente, sem configuração extra. No GitHub Pages, publique num domínio próprio ou num repositório `<usuario>.github.io`: em subcaminho (`<usuario>.github.io/<repo>/`) seria preciso mudar o `baseHref`.
+
+**Nginx:**
+
+```nginx
+server {
+  root /var/www/santo-do-dia;
+
+  location / {
+    try_files $uri $uri/index.html =404;
+  }
+  error_page 404 /404.html;
+
+  location ~* \.(js|css|woff2?)$ {
+    add_header Cache-Control "public, max-age=31536000, immutable";
+  }
+  location ~* \.(html|json)$ {
+    add_header Cache-Control "no-cache";
+  }
+}
+```
+
+**Apache (`.htaccess` na raiz publicada):**
+
+```apache
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+```
+
+### Conferir localmente antes de publicar
+
+```bash
+npm run build
+npm run servir   # http://localhost:4300, com 404.html e status 404 como na hospedagem
+npm run e2e
+```
