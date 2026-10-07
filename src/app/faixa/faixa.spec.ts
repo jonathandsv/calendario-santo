@@ -69,9 +69,10 @@ describe('Faixa', () => {
     await tecla('ArrowLeft');
     await tecla('ArrowRight');
     await tecla('Enter');
+    // A segunda tecla parte do destino da primeira, que a rota ainda não refletiu.
     expect(navegar.mock.calls.map((c) => c[0])).toEqual([
       ['/dia', '12-31'],
-      ['/dia', '01-02'],
+      ['/dia', '01-01'],
     ]);
   });
 

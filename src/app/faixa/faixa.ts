@@ -60,7 +60,7 @@ export class Faixa {
   protected readonly hidratada = signal(false);
   /** Pedido de foco no dia selecionado, atendido depois da próxima renderização. */
   private focarDepois = false;
-  /** Destino de uma navegação por teclado ainda em andamento (teclas rápidas encadeiam a partir dele). */
+  /** Destino de uma navegação por teclado ainda não refletida em `data` (teclas rápidas encadeiam a partir dele). */
   private destinoPendente: DataMesDia | null = null;
 
   protected readonly itens = computed<ItemFaixa[]>(() => {
@@ -87,6 +87,8 @@ export class Faixa {
     let primeira = true;
     afterRenderEffect(() => {
       this.itens();
+      // O input `data` só muda depois que a navegação termina; até lá o destino segue pendente.
+      if (this.destinoPendente === this.data()) this.destinoPendente = null;
       // Na primeira vez o CSS já centralizou; depois, anima até o novo dia.
       this.centralizar(primeira ? 'instant' : 'smooth');
       primeira = false;
@@ -106,9 +108,14 @@ export class Faixa {
     const destino = evento.key === 'ArrowLeft' ? diaAnterior(base, ano) : diaSeguinte(base, ano);
     this.destinoPendente = destino;
     this.focarDepois = true;
-    this.router.navigate(['/dia', destino]).finally(() => {
-      if (this.destinoPendente === destino) this.destinoPendente = null;
-    });
+    this.router.navigate(['/dia', destino]).then(
+      (ok) => !ok && this.liberar(destino),
+      () => this.liberar(destino),
+    );
+  }
+
+  private liberar(destino: DataMesDia): void {
+    if (this.destinoPendente === destino) this.destinoPendente = null;
   }
 
   private selecionado(): HTMLElement | null {

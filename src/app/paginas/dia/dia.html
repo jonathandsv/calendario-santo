@@ -1,5 +1,11 @@
 <header class="topo">
   <div class="topo-interno">
+    <div class="barra">
+      <p class="mes">
+        {{ mes() }}<span class="ano">{{ relogio.ano() ? ' ' + relogio.ano() : '' }}</span>
+      </p>
+      <a class="botao-hoje" [routerLink]="linkHoje()" (click)="irParaHoje($event)">Hoje</a>
+    </div>
     <app-faixa [data]="data()" />
   </div>
 </header>

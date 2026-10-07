@@ -12,7 +12,7 @@ Como visitante, quero voltar para hoje com um toque, para não me perder depois 
 
 ## Critérios de aceite
 
-- [ ] O botão leva à data atual e fecha o calendário, se aberto.
+- [x] O botão leva à data atual e fecha o calendário, se aberto.
 
 ## Pronto quando
 

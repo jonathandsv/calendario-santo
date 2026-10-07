@@ -9,9 +9,44 @@
 }
 
 .topo-interno {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 20px 16px 16px;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mes {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.botao-hoje {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 22px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.botao-hoje:hover {
+  background: rgb(255 255 255 / 10%);
 }
 
 .conteudo {
@@ -22,7 +57,12 @@
 
 @media (min-width: 1024px) {
   .topo-interno {
+    gap: 18px;
     padding: 20px 24px;
+  }
+
+  .botao-hoje {
+    padding: 0 20px;
   }
 
   .conteudo {
