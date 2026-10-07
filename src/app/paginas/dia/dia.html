@@ -10,10 +10,16 @@
   </div>
 </header>
 
-<main class="conteudo">
-  @if (santo(); as s) {
-    <app-ficha [santo]="s" />
-  } @else {
-    <app-erro-carga [carregando]="recarregando()" (tentarDeNovo)="tentarDeNovo()" />
-  }
-</main>
+<div class="conteudo">
+  <main class="principal">
+    @if (santo(); as s) {
+      <app-ficha [santo]="s" />
+    } @else {
+      <app-erro-carga [carregando]="recarregando()" (tentarDeNovo)="tentarDeNovo()" />
+    }
+  </main>
+
+  <aside class="lateral" aria-label="Calendário do mês">
+    <app-calendario [data]="data()" />
+  </aside>
+</div>

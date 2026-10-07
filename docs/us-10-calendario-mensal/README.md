@@ -12,11 +12,11 @@ Como visitante, quero escolher um dia num calendário, para descobrir o santo de
 
 ## Critérios de aceite
 
-- [ ] Componente de grade mensal conforme o item 5.3, com setas de mês funcionando nos 12 meses.
-- [ ] Selecionar um dia navega para ele; cada dia é um link real.
-- [ ] A grade é montada no navegador, depois da hidratação, com o ano corrente; antes disso o espaço fica reservado.
-- [ ] Fevereiro mostra 28 ou 29 dias conforme o ano corrente.
-- [ ] Navegável por teclado: setas movem o foco entre os dias; Enter seleciona.
+- [x] Componente de grade mensal conforme o item 5.3, com setas de mês funcionando nos 12 meses.
+- [x] Selecionar um dia navega para ele; cada dia é um link real.
+- [x] A grade é montada no navegador, depois da hidratação, com o ano corrente; antes disso o espaço fica reservado.
+- [x] Fevereiro mostra 28 ou 29 dias conforme o ano corrente.
+- [x] Navegável por teclado: setas movem o foco entre os dias; Enter seleciona.
 
 ## Pronto quando
 

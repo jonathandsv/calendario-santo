@@ -50,9 +50,19 @@
 }
 
 .conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   max-width: 1180px;
   margin: 0 auto;
   padding: 16px 16px 32px;
+}
+
+.lateral {
+  padding: 16px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-painel);
+  background: var(--superficie);
 }
 
 @media (min-width: 1024px) {

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSign
 import { Router, RouterLink } from '@angular/router';
 import { DadosService } from '../../dados/dados.service';
 import { DataMesDia, Santo } from '../../dados/santo';
+import { Calendario } from '../../calendario/calendario';
 import { MESES, partes } from '../../datas/datas';
 import { RelogioService } from '../../datas/relogio.service';
 import { ErroCarga } from '../../erro-carga/erro-carga';
@@ -11,7 +12,7 @@ import { Ficha } from '../../ficha/ficha';
 /** Página `/dia/MM-DD`. A ficha chega pelo `fichaResolver`. */
 @Component({
   selector: 'app-dia',
-  imports: [RouterLink, ErroCarga, Faixa, Ficha],
+  imports: [RouterLink, Calendario, ErroCarga, Faixa, Ficha],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dia.html',
   styleUrl: './dia.css',

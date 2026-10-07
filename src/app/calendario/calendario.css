@@ -1,0 +1,109 @@
+:host {
+  display: block;
+}
+
+.calendario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titulo {
+  flex: 1;
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--tinta);
+}
+
+.seta {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: var(--fundo);
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.seta:hover {
+  background: #e4e7f1;
+}
+
+/* Espaço final reservado: cabeçalho + 6 semanas, para a grade não deslocar o layout. */
+.grade {
+  min-height: calc(20px + 6 * 44px + 6 * 4px);
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 4px;
+  margin: -4px;
+  width: calc(100% + 8px);
+  table-layout: fixed;
+}
+
+th {
+  height: 20px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--apoio);
+}
+
+abbr {
+  text-decoration: none;
+}
+
+td {
+  padding: 0;
+}
+
+.dia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dia:hover {
+  background: #e4e7f1;
+}
+
+.dia.hoje {
+  box-shadow: inset 0 0 0 2px var(--destaque);
+  background: var(--superficie);
+  font-weight: 700;
+}
+
+.dia[aria-current='date'] {
+  background: var(--azul-noite);
+  color: #fff;
+  font-weight: 700;
+}
+
+.dica {
+  margin: 0;
+  font-size: 13px;
+  text-align: center;
+  color: var(--apoio);
+}
