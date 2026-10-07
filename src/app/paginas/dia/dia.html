@@ -1,12 +1,13 @@
-<main class="dia">
+<header class="topo">
+  <div class="topo-interno">
+    <app-faixa [data]="data()" />
+  </div>
+</header>
+
+<main class="conteudo">
   @if (santo(); as s) {
     <app-ficha [santo]="s" />
   } @else {
     <app-erro-carga [carregando]="recarregando()" (tentarDeNovo)="tentarDeNovo()" />
   }
-
-  <nav class="vizinhos" aria-label="Dias vizinhos">
-    <a [routerLink]="['/dia', anterior()]">Dia anterior</a>
-    <a [routerLink]="['/dia', seguinte()]">Dia seguinte</a>
-  </nav>
 </main>

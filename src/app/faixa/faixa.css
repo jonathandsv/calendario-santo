@@ -1,0 +1,114 @@
+:host {
+  display: block;
+  --por-tela: 7;
+  --vao: 6px;
+}
+
+.lista {
+  display: flex;
+  gap: var(--vao);
+  margin: 0;
+  padding: 2px 0 4px;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.lista::-webkit-scrollbar {
+  display: none;
+}
+
+/* Antes da hidratação, só o dia selecionado é ponto de encaixe: o navegador já o centraliza. */
+.selecionado {
+  scroll-snap-align: center;
+}
+
+/* Depois da hidratação, a faixa rola livremente e encaixa em qualquer dia. */
+.lista.hidratada {
+  scroll-snap-type: x proximity;
+}
+
+.lista.hidratada > li {
+  scroll-snap-align: center;
+}
+
+li {
+  flex: 0 0 calc((100% - (var(--por-tela) - 1) * var(--vao)) / var(--por-tela));
+}
+
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 64px;
+  border-radius: var(--raio-botao);
+  background: rgb(255 255 255 / 9%);
+  color: #fff;
+  text-decoration: none;
+}
+
+.dia:hover {
+  background: rgb(255 255 255 / 16%);
+}
+
+.dia:focus-visible {
+  outline-offset: -3px;
+}
+
+.semana {
+  /* Altura reservada: o texto só chega depois da hidratação. */
+  min-height: 1.2em;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #c9d0e6;
+}
+
+.numero {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.dia[aria-current='date'] {
+  background: var(--destaque);
+  color: var(--tinta);
+}
+
+.dia[aria-current='date'] .semana {
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.dia[aria-current='date'] .numero {
+  font-weight: 700;
+}
+
+.dia[aria-current='date']:focus-visible {
+  outline-color: #fff;
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --por-tela: 11;
+    --vao: 8px;
+  }
+
+  .dia {
+    height: 68px;
+  }
+
+  .semana {
+    font-size: 12px;
+  }
+
+  .numero {
+    font-size: 22px;
+  }
+}

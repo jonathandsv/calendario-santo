@@ -7,7 +7,7 @@ test.describe('ficha do santo', () => {
     const resposta = await page.goto('/dia/10-06');
     const html = await resposta!.text();
     expect(html).toMatch(/class="data"[^>]*>(<!---->)?\s*<span[^>]*>6 de outubro<\/span>/);
-    expect(html).not.toMatch(/Terça-feira|class="semana"/);
+    expect(html).not.toContain('Terça-feira');
 
     const semana = await page.evaluate(() =>
       new Date(new Date().getFullYear(), 9, 6).toLocaleDateString('pt-BR', { weekday: 'long' }),

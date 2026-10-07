@@ -12,11 +12,11 @@ Como visitante, quero uma faixa com os dias próximos, para passar de um dia a o
 
 ## Critérios de aceite
 
-- [ ] Atende ao item 5.2.
-- [ ] Cada dia é um link real para `/dia/MM-DD`; os números vêm no HTML pré-renderizado e os dias da semana aparecem depois da hidratação, sem deslocar o layout.
-- [ ] Tocar num dia troca a ficha e centraliza o dia na faixa.
-- [ ] Setas esquerda e direita do teclado mudam o dia quando a faixa tem foco.
-- [ ] A faixa atravessa a virada de mês e de ano.
+- [x] Atende ao item 5.2.
+- [x] Cada dia é um link real para `/dia/MM-DD`; os números vêm no HTML pré-renderizado e os dias da semana aparecem depois da hidratação, sem deslocar o layout.
+- [x] Tocar num dia troca a ficha e centraliza o dia na faixa.
+- [x] Setas esquerda e direita do teclado mudam o dia quando a faixa tem foco.
+- [x] A faixa atravessa a virada de mês e de ano.
 
 ## Pronto quando
 

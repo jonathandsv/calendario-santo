@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { hojeNoNavegador, vigiarConsole } from './apoio';
+import { diaNaFaixa, hojeNoNavegador, vigiarConsole } from './apoio';
 
 test.describe('rotas e pré-renderização', () => {
   test('/ leva ao dia de hoje substituindo a entrada do histórico', async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe('rotas e pré-renderização', () => {
     await page.waitForLoadState('networkidle');
     await page.evaluate(() => ((window as unknown as { marca: number }).marca = 1));
 
-    await page.getByRole('link', { name: 'Dia seguinte' }).click();
+    await diaNaFaixa(page, '1 de janeiro').click();
     await expect(page).toHaveURL('/dia/01-01');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Santa Maria, Mãe de Deus');
 
@@ -65,7 +65,7 @@ test.describe('rotas e pré-renderização', () => {
     await page.waitForLoadState('networkidle');
     await page.route('**/data/dias/10-07.json', (r) => r.abort());
 
-    await page.getByRole('link', { name: 'Dia seguinte' }).click();
+    await diaNaFaixa(page, '7 de outubro').click();
     await expect(page).toHaveURL('/dia/10-07');
     const botao = page.getByRole('button', { name: 'Tentar de novo' });
     await expect(botao).toBeVisible();

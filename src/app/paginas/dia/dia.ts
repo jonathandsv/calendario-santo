@@ -1,23 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, input, linkedSignal, signal } from '@angular/core';
 import { DadosService } from '../../dados/dados.service';
 import { DataMesDia, Santo } from '../../dados/santo';
-import { diaAnterior, diaSeguinte } from '../../datas/datas';
-import { RelogioService } from '../../datas/relogio.service';
 import { ErroCarga } from '../../erro-carga/erro-carga';
+import { Faixa } from '../../faixa/faixa';
 import { Ficha } from '../../ficha/ficha';
 
 /** Página `/dia/MM-DD`. A ficha chega pelo `fichaResolver`. */
 @Component({
   selector: 'app-dia',
-  imports: [RouterLink, ErroCarga, Ficha],
+  imports: [ErroCarga, Faixa, Ficha],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dia.html',
   styleUrl: './dia.css',
 })
 export class Dia {
   private readonly dados = inject(DadosService);
-  private readonly relogio = inject(RelogioService);
 
   /** Parâmetro da rota. */
   readonly data = input.required<DataMesDia>();
@@ -26,9 +23,6 @@ export class Dia {
 
   protected readonly santo = linkedSignal(() => this.ficha());
   protected readonly recarregando = signal(false);
-
-  protected readonly anterior = computed(() => diaAnterior(this.data(), this.relogio.ano()));
-  protected readonly seguinte = computed(() => diaSeguinte(this.data(), this.relogio.ano()));
 
   protected tentarDeNovo(): void {
     this.recarregando.set(true);

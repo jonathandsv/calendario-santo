@@ -1,4 +1,5 @@
 import { expect, Page, test } from '@playwright/test';
+import { diaNaFaixa } from './apoio';
 
 const IMAGEM = {
   arquivo: 'Teste.jpg',
@@ -30,7 +31,7 @@ test.describe('imagem com crédito', () => {
     await page.goto('/dia/10-06');
     await page.waitForLoadState('networkidle');
     await comImagem(page, '/img/santo-placeholder.svg');
-    await page.getByRole('link', { name: 'Dia seguinte' }).click();
+    await diaNaFaixa(page, '7 de outubro').click();
 
     const foto = page.getByRole('img', { name: 'Nossa Senhora do Rosário' });
     await expect(foto).toHaveAttribute('loading', 'lazy');
@@ -42,7 +43,7 @@ test.describe('imagem com crédito', () => {
     await page.goto('/dia/10-06');
     await page.waitForLoadState('networkidle');
     await comImagem(page, '/img/santos/nao-existe.jpg');
-    await page.getByRole('link', { name: 'Dia seguinte' }).click();
+    await diaNaFaixa(page, '7 de outubro').click();
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Nossa Senhora do Rosário');
     await expect(page.locator('app-imagem .reservado img')).toBeVisible();

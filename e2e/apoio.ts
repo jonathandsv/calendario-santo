@@ -18,3 +18,10 @@ export function hojeNoNavegador(pagina: Page): Promise<string> {
   });
 }
 
+
+/** Link de um dia na faixa, pelo texto final do rótulo (ex.: "7 de outubro"). */
+export function diaNaFaixa(pagina: Page, diaEMes: string) {
+  return pagina
+    .getByRole('navigation', { name: 'Dias próximos' })
+    .getByRole('link', { name: new RegExp(`(^|, )${diaEMes}$`) });
+}

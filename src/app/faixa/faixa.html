@@ -1,0 +1,17 @@
+<nav class="faixa" aria-label="Dias próximos">
+  <ol #lista class="lista" [class.hidratada]="hidratada()">
+    @for (item of itens(); track item.data) {
+      <li [class.selecionado]="item.selecionado">
+        <a
+          class="dia"
+          [routerLink]="['/dia', item.data]"
+          [attr.aria-current]="item.selecionado ? 'date' : null"
+          [attr.aria-label]="item.rotulo"
+        >
+          <span class="semana" aria-hidden="true">{{ item.semana }}</span>
+          <span class="numero" aria-hidden="true">{{ item.numero }}</span>
+        </a>
+      </li>
+    }
+  </ol>
+</nav>
