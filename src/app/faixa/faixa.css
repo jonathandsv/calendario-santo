@@ -56,6 +56,7 @@ li {
 }
 
 .dia:focus-visible {
+  outline: 3px solid var(--destaque);
   outline-offset: -3px;
 }
 
@@ -92,6 +93,20 @@ li {
 
 .dia[aria-current='date']:focus-visible {
   outline-color: #fff;
+}
+
+/* Telas estreitas: menos dias por vez, para cada um ter ao menos 44px de largura. */
+@media (max-width: 399px) {
+  :host {
+    --por-tela: 6;
+    --vao: 4px;
+  }
+}
+
+@media (max-width: 339px) {
+  :host {
+    --por-tela: 5;
+  }
 }
 
 @media (min-width: 1024px) {

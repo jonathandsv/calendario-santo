@@ -12,8 +12,8 @@ Como pessoa que usa teclado ou leitor de tela, quero usar todas as funções, pa
 
 ## Critérios de aceite
 
-- [ ] Todos os critérios de acessibilidade da seção 6 atendidos.
-- [ ] Verificação automática de acessibilidade sem violações graves nas duas larguras.
+- [x] Todos os critérios de acessibilidade da seção 6 atendidos.
+- [x] Verificação automática de acessibilidade sem violações graves nas duas larguras.
 
 ## Pronto quando
 

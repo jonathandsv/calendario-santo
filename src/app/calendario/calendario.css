@@ -114,3 +114,12 @@ td {
   text-align: center;
   color: var(--apoio);
 }
+
+/* Telas estreitas: menos espaço entre os dias, para cada um ter ao menos 44px de largura. */
+@media (max-width: 399px) {
+  table {
+    border-spacing: 2px;
+    margin: -2px;
+    width: calc(100% + 4px);
+  }
+}

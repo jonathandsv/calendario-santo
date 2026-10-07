@@ -37,7 +37,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--destaque);
+  outline: 3px solid var(--azul-noite);
   outline-offset: 2px;
 }
 

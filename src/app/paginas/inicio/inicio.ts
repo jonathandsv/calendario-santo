@@ -31,6 +31,9 @@ import { MetadadosService } from '../../metadados/metadados.service';
       color: var(--azul-noite);
     }
     a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       color: var(--azul-noite);
       font-weight: 600;
     }
