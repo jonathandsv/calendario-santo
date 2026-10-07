@@ -20,6 +20,7 @@ import { RelogioService } from '../../datas/relogio.service';
 import { ErroCarga } from '../../erro-carga/erro-carga';
 import { Faixa } from '../../faixa/faixa';
 import { Ficha } from '../../ficha/ficha';
+import { Proximos } from '../../proximos/proximos';
 
 const FOCAVEIS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -43,7 +44,7 @@ function prenderFoco(conteiner: HTMLElement, evento: KeyboardEvent): void {
 /** Página `/dia/MM-DD`. A ficha chega pelo `fichaResolver`. */
 @Component({
   selector: 'app-dia',
-  imports: [RouterLink, Calendario, ErroCarga, Faixa, Ficha],
+  imports: [RouterLink, Calendario, ErroCarga, Faixa, Ficha, Proximos],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dia.html',
   styleUrl: './dia.css',

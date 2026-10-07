@@ -12,8 +12,8 @@ Como visitante no computador, quero ver os próximos três santos, para me antec
 
 ## Critérios de aceite
 
-- [ ] Três cartões com data e nome, conforme o item 5.5, clicáveis.
-- [ ] Em 30/12 e 31/12 os cartões continuam em janeiro.
+- [x] Três cartões com data e nome, conforme o item 5.5, clicáveis.
+- [x] Em 30/12 e 31/12 os cartões continuam em janeiro.
 
 ## Pronto quando
 

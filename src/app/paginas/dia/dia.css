@@ -94,6 +94,11 @@
   padding: 16px 16px 32px;
 }
 
+/* "Próximos dias" só no computador (PRD 5.5). */
+.proximos {
+  display: none;
+}
+
 /* No celular o calendário fica no painel; a coluna lateral é do computador (US-12). */
 .lateral {
   display: none;
@@ -197,8 +202,15 @@
   }
 
   .principal {
+    display: flex;
     flex: 1 1 auto;
+    flex-direction: column;
+    gap: 28px;
     min-width: 0;
+  }
+
+  .proximos {
+    display: block;
   }
 
   .lateral {
