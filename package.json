@@ -16,7 +16,8 @@
     "postbuild": "node scripts/pos-build.mjs",
     "servir": "node scripts/servir.mjs",
     "e2e": "playwright test",
-    "verificar": "npm run build && npm test && npm run lint && npm run e2e"
+    "verificar": "npm run build && npm test && npm run lint && npm run e2e",
+    "imagens": "node scripts/buscar-imagens.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.0",

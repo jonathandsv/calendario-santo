@@ -12,14 +12,14 @@ Como responsável pelo conteúdo, quero rodar o script que busca as imagens no W
 
 ## Critérios de aceite
 
-- [ ] O script `scripts/buscar-imagens.mjs` lê e regrava `dados/santos.json` (o caminho pode ser passado por argumento) e roda com `npm run imagens`.
-- [ ] Antes da execução completa, o script é validado contra a API real com três registros (`10-06`, `08-13` e `02-06`); ele só foi testado com respostas simuladas, então erros de formato da API devem ser corrigidos aqui.
-- [ ] Para cada registro com `wikipedia`, o script grava `wikidata` e, quando a imagem principal está no Wikimedia Commons, o objeto `imagem` com `arquivo`, `url`, `pagina_commons`, `licenca` e `autor`.
-- [ ] O script baixa o arquivo de 600px de largura para `public/img/santos/MM-DD.<ext>` e grava o caminho em `imagem.local`; uma nova execução não baixa de novo o que já existe.
-- [ ] Registros sem página, sem imagem ou com imagem fora do Commons ficam com `imagem: null`, sem interromper a execução.
-- [ ] As requisições usam `User-Agent` identificado e pausa entre lotes; falha de rede em um lote é registrada e a execução continua.
-- [ ] Ao final, o script gera `docs/us-18-baixar-imagens/relatorio-imagens.md` com o total de imagens e uma tabela de data, nome, licença e autor.
-- [ ] O relatório lista à parte as imagens cuja licença não seja domínio público, CC0, CC BY ou CC BY-SA, para revisão manual; essas ficam com `imagem: null` até serem aprovadas.
+- [x] O script `scripts/buscar-imagens.mjs` lê e regrava `dados/santos.json` (o caminho pode ser passado por argumento) e roda com `npm run imagens`.
+- [x] Antes da execução completa, o script é validado contra a API real com três registros (`10-06`, `08-13` e `02-06`); ele só foi testado com respostas simuladas, então erros de formato da API devem ser corrigidos aqui.
+- [x] Para cada registro com `wikipedia`, o script grava `wikidata` e, quando a imagem principal está no Wikimedia Commons, o objeto `imagem` com `arquivo`, `url`, `pagina_commons`, `licenca` e `autor`.
+- [x] O script baixa o arquivo de 600px de largura para `public/img/santos/MM-DD.<ext>` e grava o caminho em `imagem.local`; uma nova execução não baixa de novo o que já existe.
+- [x] Registros sem página, sem imagem ou com imagem fora do Commons ficam com `imagem: null`, sem interromper a execução.
+- [x] As requisições usam `User-Agent` identificado e pausa entre lotes; falha de rede em um lote é registrada e a execução continua.
+- [x] Ao final, o script gera `docs/us-18-baixar-imagens/relatorio-imagens.md` com o total de imagens e uma tabela de data, nome, licença e autor.
+- [x] O relatório lista à parte as imagens cuja licença não seja domínio público, CC0, CC BY ou CC BY-SA, para revisão manual; essas ficam com `imagem: null` até serem aprovadas.
 - [ ] O `santos.json` atualizado e as imagens baixadas são versionados no repositório; o formato dos demais campos não muda e continuam existindo 366 registros.
 
 ## Pronto quando
