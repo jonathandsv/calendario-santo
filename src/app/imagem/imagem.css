@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.imagem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.moldura {
+  height: 220px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #e4e7f1;
+}
+
+.moldura img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.reservado img {
+  object-fit: cover;
+}
+
+figcaption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--apoio);
+}
+
+figcaption a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+  .moldura {
+    height: 380px;
+    border-radius: var(--raio-painel);
+  }
+}

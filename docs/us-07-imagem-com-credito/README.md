@@ -12,9 +12,9 @@ Como visitante, quero ver a imagem do santo, para reconhecê-lo.
 
 ## Critérios de aceite
 
-- [ ] Com `imagem` nula, aparece o espaço reservado nas dimensões finais.
-- [ ] Com `imagem` preenchida, aparece a imagem de `imagem.local` com texto alternativo, carregamento tardio e crédito com link para `pagina_commons`.
-- [ ] Se a imagem falhar ao carregar, volta ao espaço reservado.
+- [x] Com `imagem` nula, aparece o espaço reservado nas dimensões finais.
+- [x] Com `imagem` preenchida, aparece a imagem de `imagem.local` com texto alternativo, carregamento tardio e crédito com link para `pagina_commons`.
+- [x] Se a imagem falhar ao carregar, volta ao espaço reservado.
 
 ## Pronto quando
 

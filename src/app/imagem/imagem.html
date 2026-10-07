@@ -1,0 +1,16 @@
+@if (visivel(); as img) {
+  <figure class="imagem">
+    <div class="moldura">
+      <img #foto [src]="img.local" [alt]="nome()" loading="lazy" decoding="async" (error)="falhou.set(true)" />
+    </div>
+    <figcaption>
+      Imagem: <a [href]="img.pagina_commons" target="_blank" rel="noopener noreferrer">{{ credito() }}</a>
+    </figcaption>
+  </figure>
+} @else {
+  <div class="imagem">
+    <div class="moldura reservado">
+      <img src="/img/santo-placeholder.svg" alt="" width="400" height="300" />
+    </div>
+  </div>
+}

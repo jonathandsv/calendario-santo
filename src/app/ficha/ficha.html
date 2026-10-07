@@ -1,4 +1,6 @@
 <article class="ficha" [attr.aria-labelledby]="'nome-' + santo().data">
+  <app-imagem class="foto" [imagem]="santo().imagem" [nome]="santo().nome" />
+
   <div class="cabecalho">
     <p class="data">
       @if (diaDaSemana(); as semana) {

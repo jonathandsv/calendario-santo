@@ -3,6 +3,7 @@ import { ROTULOS_GRAU } from '../dados/rotulos';
 import { Santo } from '../dados/santo';
 import { DIAS_DA_SEMANA, diaDaSemana, diaEMes } from '../datas/datas';
 import { RelogioService } from '../datas/relogio.service';
+import { Imagem } from '../imagem/imagem';
 import { fatosDo } from './fatos';
 
 /**
@@ -11,6 +12,7 @@ import { fatosDo } from './fatos';
  */
 @Component({
   selector: 'app-ficha',
+  imports: [Imagem],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './ficha.html',
   styleUrl: './ficha.css',
