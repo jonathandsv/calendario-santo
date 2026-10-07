@@ -13,7 +13,7 @@
     "prebuild": "npm run dados",
     "pretest": "npm run dados",
     "test:scripts": "node --test \"scripts/*.test.mjs\"",
-    "postbuild": "node scripts/pos-build.mjs",
+    "postbuild": "node scripts/pos-build.mjs && node scripts/verificar-build.mjs",
     "servir": "node scripts/servir.mjs",
     "e2e": "playwright test",
     "verificar": "npm run build && npm test && npm run lint && npm run e2e",

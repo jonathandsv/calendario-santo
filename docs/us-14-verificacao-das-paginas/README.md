@@ -12,10 +12,10 @@ Como desenvolvedor, quero conferir o resultado do build automaticamente, para ga
 
 ## Critérios de aceite
 
-- [ ] Um script de verificação roda depois do build e falha se faltar algum dos 366 `dia/MM-DD/index.html`.
-- [ ] Cada HTML contém o nome e a descrição do seu dia.
-- [ ] Nenhum HTML contém nome de dia da semana nem marcação de "hoje" (regra da seção 3.1).
-- [ ] Abrir `10-06`, `02-29` e `12-31` no navegador não gera aviso de hidratação no console.
+- [x] Um script de verificação roda depois do build e falha se faltar algum dos 366 `dia/MM-DD/index.html`.
+- [x] Cada HTML contém o nome e a descrição do seu dia.
+- [x] Nenhum HTML contém nome de dia da semana nem marcação de "hoje" (regra da seção 3.1).
+- [x] Abrir `10-06`, `02-29` e `12-31` no navegador não gera aviso de hidratação no console.
 
 ## Pronto quando
 
