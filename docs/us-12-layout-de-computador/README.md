@@ -12,9 +12,9 @@ Como visitante no computador, quero aproveitar a tela larga, para ver ficha e ca
 
 ## Critérios de aceite
 
-- [ ] A partir de 1024px, vale o layout do item 5.6, com calendário fixo à direita.
-- [ ] A faixa mostra cerca de 11 dias.
-- [ ] Entre 320px e 1920px não há rolagem horizontal da página.
+- [x] A partir de 1024px, vale o layout do item 5.6, com calendário fixo à direita.
+- [x] A faixa mostra cerca de 11 dias.
+- [x] Entre 320px e 1920px não há rolagem horizontal da página.
 
 ## Pronto quando
 

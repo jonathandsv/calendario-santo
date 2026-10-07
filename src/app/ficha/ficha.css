@@ -1,7 +1,13 @@
-.ficha {
+.ficha,
+.texto {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.nome,
+.descricao {
+  overflow-wrap: break-word;
 }
 
 .cabecalho {
@@ -119,6 +125,24 @@ dd {
 }
 
 @media (min-width: 1024px) {
+  /* Imagem ao lado do texto (PRD 5.6). */
+  .ficha {
+    flex-flow: row wrap;
+    align-items: flex-start;
+    gap: 28px;
+  }
+
+  .foto {
+    flex: 1 1 280px;
+    min-width: 0;
+  }
+
+  .texto {
+    flex: 2 1 340px;
+    min-width: 0;
+    gap: 18px;
+  }
+
   .cabecalho {
     gap: 10px;
   }
