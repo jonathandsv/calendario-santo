@@ -31,7 +31,7 @@ describe('DadosService', () => {
     let recebido: Santo | undefined;
     servico.ficha(data).subscribe((s) => (recebido = s));
 
-    const req = http.expectOne(`/data/dias/${data}.json`);
+    const req = http.expectOne(`data/dias/${data}.json`);
     expect(req.request.method).toBe('GET');
     req.flush({ data, nome } as Santo);
 

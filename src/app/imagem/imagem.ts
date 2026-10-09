@@ -34,6 +34,9 @@ export class Imagem {
     return imagem?.local && !this.falhou() ? imagem : null;
   });
 
+  /** `local` vem dos dados como `/img/...`; sem a barra inicial, o endereço segue o `<base href>`. */
+  protected readonly endereco = computed(() => this.visivel()?.local?.replace(/^\//, '') ?? '');
+
   protected readonly credito = computed(() => {
     const imagem = this.imagem();
     return imagem ? [imagem.autor, imagem.licenca].filter(Boolean).join(', ') || 'Wikimedia Commons' : '';

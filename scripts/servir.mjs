@@ -1,6 +1,8 @@
 // Servidor estático mínimo para o build, com o comportamento de uma hospedagem estática:
 // `/dia/10-06` serve `dia/10-06/index.html` e endereços inexistentes recebem `404.html` com status 404.
-// Uso: node scripts/servir.mjs [porta]   (padrão 4300)
+// Uso: node scripts/servir.mjs [porta] [subcaminho]   (padrão 4300, na raiz)
+// Com subcaminho (ex.: /calendario-santo/), imita o GitHub Pages de um repositório; o build precisa
+// ter sido gerado com o mesmo `--base-href`.
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
@@ -36,11 +38,13 @@ async function arquivo(caminho) {
   return null;
 }
 
-export function servir(porta = 4300) {
+export function servir(porta = 4300, base = '/') {
+  const prefixo = base.replace(/\/?$/, '/');
   const servidor = createServer(async (req, res) => {
     const caminho = decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname);
-    const alvo = normalize(join(RAIZ, caminho));
-    const encontrado = alvo.startsWith(RAIZ) ? await arquivo(alvo) : null;
+    const dentro = (caminho + '/').startsWith(prefixo);
+    const alvo = normalize(join(RAIZ, caminho.slice(prefixo.length - 1)));
+    const encontrado = dentro && alvo.startsWith(RAIZ) ? await arquivo(alvo) : null;
     const final = encontrado ?? join(RAIZ, '404.html');
     res.writeHead(encontrado ? 200 : 404, { 'Content-Type': TIPOS[extname(final)] ?? 'application/octet-stream' });
     createReadStream(final).pipe(res);
@@ -50,6 +54,7 @@ export function servir(porta = 4300) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const porta = Number(process.argv[2] ?? 4300);
-  await servir(porta);
-  console.log(`Servindo o build em http://localhost:${porta}`);
+  const base = process.argv[3] ?? '/';
+  await servir(porta, base);
+  console.log(`Servindo o build em http://localhost:${porta}${base.replace(/\/?$/, '/')}`);
 }

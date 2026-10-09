@@ -22,7 +22,7 @@ test.describe('imagem com crédito', () => {
   test('sem imagem, mostra o espaço reservado', async ({ page }) => {
     await page.goto('/dia/10-06');
     const reservado = page.locator('app-imagem .reservado img');
-    await expect(reservado).toHaveAttribute('src', '/img/santo-placeholder.svg');
+    await expect(reservado).toHaveAttribute('src', 'img/santo-placeholder.svg');
     const caixa = await page.locator('app-imagem .moldura').boundingBox();
     expect(caixa!.height).toBeGreaterThanOrEqual(220);
   });

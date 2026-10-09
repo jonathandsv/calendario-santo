@@ -22,7 +22,7 @@ async function montar(imagem: ImagemSanto | null) {
 describe('Imagem', () => {
   it('sem imagem, mostra o espaço reservado', async () => {
     const { el } = await montar(null);
-    expect(el.querySelector('.reservado img')?.getAttribute('src')).toBe('/img/santo-placeholder.svg');
+    expect(el.querySelector('.reservado img')?.getAttribute('src')).toBe('img/santo-placeholder.svg');
     expect(el.querySelector('.reservado img')?.getAttribute('alt')).toBe('');
     expect(el.querySelector('figure')).toBeNull();
   });
@@ -30,7 +30,7 @@ describe('Imagem', () => {
   it('com imagem, mostra o arquivo local com alt, carregamento tardio e crédito', async () => {
     const { el } = await montar(BRUNO);
     const img = el.querySelector('img') as HTMLImageElement;
-    expect(img.getAttribute('src')).toBe('/img/santos/10-06.jpg');
+    expect(img.getAttribute('src')).toBe('img/santos/10-06.jpg');
     expect(img.alt).toBe('São Bruno');
     expect(img.getAttribute('loading')).toBe('lazy');
 

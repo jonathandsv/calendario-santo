@@ -86,7 +86,22 @@ dist/santo-do-dia/browser/
 
 ### Exemplos de configuração
 
-**Netlify, Cloudflare Pages, Vercel, GitHub Pages:** pasta de publicação `dist/santo-do-dia/browser`, comando de build `npm run build`. Todas usam `404.html` da raiz automaticamente, sem configuração extra. No GitHub Pages, publique num domínio próprio ou num repositório `<usuario>.github.io`: em subcaminho (`<usuario>.github.io/<repo>/`) seria preciso mudar o `baseHref`.
+**GitHub Pages:** o workflow `.github/workflows/pages.yml` gera e publica o site a cada push na `main`.
+
+1. No GitHub, em **Settings → Pages → Build and deployment → Source**, escolha **GitHub Actions** (uma vez só).
+2. Faça push na `main`, ou rode o workflow manualmente na aba **Actions**.
+3. O site fica em `https://<usuario>.github.io/<repositório>/`.
+
+O workflow passa `--base-href "/<repositório>/"` para o build, então o site funciona nesse subcaminho. Com domínio próprio (configurado em Settings → Pages), o subcaminho some e o build usa `/`. Nos dois casos, ajuste `URL_DO_SITE` em `src/app/site.ts` para o endereço final. O GitHub Pages usa o `404.html` da raiz sozinho.
+
+Para conferir localmente um build em subcaminho:
+
+```bash
+npm run build -- --base-href /calendario-santo/
+node scripts/servir.mjs 4300 /calendario-santo/   # http://localhost:4300/calendario-santo/
+```
+
+**Netlify, Cloudflare Pages, Vercel:** pasta de publicação `dist/santo-do-dia/browser`, comando de build `npm run build`. Todas usam `404.html` da raiz automaticamente, sem configuração extra.
 
 **Nginx:**
 

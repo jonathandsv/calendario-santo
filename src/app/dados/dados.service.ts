@@ -13,9 +13,12 @@ export class DadosService {
   /** Os 366 dias, de `01-01` a `12-31`, com data e nome. */
   readonly indice: readonly ItemIndice[] = INDICE;
 
-  /** Ficha completa do dia. No build, a resposta é embutida no HTML pelo cache de transferência. */
+  /**
+   * Ficha completa do dia. No build, a resposta é embutida no HTML pelo cache de transferência.
+   * Endereço relativo ao `<base href>`, para o site funcionar também num subcaminho (GitHub Pages).
+   */
   ficha(data: DataMesDia): Observable<Santo> {
-    return this.http.get<Santo>(`/data/dias/${data}.json`);
+    return this.http.get<Santo>(`data/dias/${data}.json`);
   }
 
   /** Nome do santo do dia, sem requisição. */
