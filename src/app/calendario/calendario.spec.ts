@@ -106,6 +106,19 @@ describe('Calendario', () => {
     el.remove();
   });
 
+  it('teclas seguidas, antes de o foco andar, somam os passos', async () => {
+    const { fixture, el } = await montar('10-06');
+    document.body.appendChild(el);
+    const origem = el.querySelector<HTMLElement>('[data-dia="10-06"]')!;
+    origem.focus();
+    // As duas teclas chegam ao mesmo elemento, sem renderização entre elas.
+    origem.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    origem.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    await fixture.whenStable();
+    expect((document.activeElement as HTMLElement).dataset['dia']).toBe('10-14');
+    el.remove();
+  });
+
   it('avisa quando um dia é escolhido', async () => {
     const { fixture, dias } = await montar('10-06');
     const escolhidos: string[] = [];

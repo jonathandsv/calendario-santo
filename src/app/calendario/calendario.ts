@@ -116,8 +116,10 @@ export class Calendario {
   protected teclar(evento: KeyboardEvent): void {
     const passos: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
     const passo = passos[evento.key];
-    const origem = (evento.target as HTMLElement).dataset?.['dia'];
-    if (passo === undefined || !origem) return;
+    const alvo = (evento.target as HTMLElement).dataset?.['dia'];
+    if (passo === undefined || !alvo) return;
+    // Teclas seguidas, antes de o foco andar: parte do destino pendente, não do elemento.
+    const origem = this.pedirFoco ? (this.focado() ?? alvo) : alvo;
     evento.preventDefault();
     const destino = deslocar(origem, passo, this.ano());
     this.focado.set(destino);
