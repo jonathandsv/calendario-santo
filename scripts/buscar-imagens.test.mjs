@@ -3,7 +3,7 @@ import { mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, beforeEach, describe, it } from 'node:test';
-import { buscarImagens, extensaoDe, licencaLivre, semRastreio } from './buscar-imagens.mjs';
+import { buscarImagens, extensaoDe, licencaLivre, semHtml, semRastreio } from './buscar-imagens.mjs';
 
 const registro = (data, nome, wikipedia) => ({
   data, nome, grau: null, fonte: 'martirologio', tipo: 'pessoa', descricao: 'x',
@@ -190,5 +190,14 @@ describe('funções auxiliares', () => {
     assert.equal(extensaoDe('https://x/500px-A.svg.png?a=1'), '.png');
     assert.equal(extensaoDe('https://x/A.JPEG'), '.jpg');
     assert.equal(semRastreio('https://x/a.jpg?utm_source=c&utm_campaign=d'), 'https://x/a.jpg');
+  });
+});
+
+describe('semHtml', () => {
+  it('descarta os trechos ocultos que o Commons inclui no autor', () => {
+    assert.equal(semHtml('<span lang="en">Anonymous</span><span style="display:none">Unknown author</span>'), 'Anonymous');
+    assert.equal(semHtml('<a href="//x">Il Sodoma</a>'), 'Il Sodoma');
+    assert.equal(semHtml('Smith &amp; Co.&nbsp;'), 'Smith & Co.');
+    assert.equal(semHtml('<span style="display: none">só oculto</span>'), null);
   });
 });

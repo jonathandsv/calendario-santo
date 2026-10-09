@@ -31,7 +31,16 @@ export const PADRAO = {
 };
 
 const lotes = (xs, n) => Array.from({ length: Math.ceil(xs.length / n) }, (_, i) => xs.slice(i * n, i * n + n));
-const semHtml = (s) => (s ?? '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim() || null;
+/** Texto puro de um campo HTML do Commons, sem os trechos ocultos (`display:none`) que ele inclui. */
+export function semHtml(s) {
+  const texto = (s ?? '')
+    .replace(/<(\w+)[^>]*display:\s*none[^>]*>[\s\S]*?<\/\1>/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return texto || null;
+}
 /** Tira da URL os parâmetros de rastreamento (`utm_*`) que a API acrescenta. */
 export function semRastreio(url) {
   const u = new URL(url);

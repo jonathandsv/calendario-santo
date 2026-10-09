@@ -31,3 +31,9 @@ SANTO_USER_AGENT="SantoDoDia/1.0 (https://github.com/<usuario>/<repositorio>)" n
 
 - Rodar `npm run imagens` com `SANTO_USER_AGENT` de contato e versionar o resultado.
 - Revisar à mão as licenças listadas no relatório (PRD 8.1).
+
+## Execução parcial (2026-10-08)
+
+- A execução completa foi interrompida pelo usuário por demora. Ficaram 47 imagens (de 01-04 a 03-08), todas com licença livre. O `santos.json` foi preenchido rodando o script só para essas datas (`--so=...`), sem baixar de novo.
+- Corrigido: o autor vinha com o texto oculto (`display:none`) que o Commons inclui no HTML (ex.: "Unknown authorUnknown author").
+- Pendente: rodar `npm run imagens` de novo para os demais dias; as imagens já baixadas são reaproveitadas.
